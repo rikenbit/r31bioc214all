@@ -51,23 +51,31 @@ directory "/home/vagrant/R/library" do
 end
 
 # for Bioconductor ALL package
-package "libxml2-dev"
-package "libcurl4-gnutls-dev"
-package "pkg-config"
-package "libgtkmm-2.4-dev"
-package "libgsl0-dev"
-package "libfftw3-dev"
-package "libhdf4-dev"
-package "libhdf5-serial-dev"
-package "libtiff4-dev"
-package "libgmp-dev"
-package "libcairo2-dev"
-package "openjdk-7-jdk"
-package "libglu1-mesa-dev"
-package "mesa-common-dev"
-package "tk-dev"
-package "ggobi"
-package "jags"
+case node.platform
+when 'ubuntu', 'debian'
+  package "libxml2-dev"
+  package "libcurl4-gnutls-dev"
+  package "pkg-config"
+  package "libgtkmm-2.4-dev"
+  package "libgsl0-dev"
+  package "libfftw3-dev"
+  package "libhdf4-dev"
+  package "libhdf5-serial-dev"
+  package "libtiff4-dev"
+  package "libgmp-dev"
+  package "libcairo2-dev"
+  package "openjdk-7-jdk"
+  package "libglu1-mesa-dev"
+  package "mesa-common-dev"
+  package "tk-dev"
+  package "ggobi"
+  package "jags"
+when 'centos'
+  package "libxml2-devel"
+  package "libcurl-devel"
+  # TODO other package
+
+end
 
 # Bioconductor install script
 cookbook_file '/home/vagrant/installBioconductor.R' do
